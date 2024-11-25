@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Трек-номер</title>
+    <link rel="icon" href="img/icon.png" type="image/png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Прелоадер */
+        .preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.8);
+            z-index: 9999;
+        }
+
+        .preloader .loader {
+            width: 100px;
+            height: 100px;
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid orange;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Размытие фона */
+        .blurred {
+            filter: blur(5px);
+        }
+
+        /* Скрытие прелоадера */
+        .hidden {
+            display: none;
+        }
+
+        /* Основной блок nt-blok */
+        .nt-blok, .new-z {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .nt-blok img, .new-z img {
+            max-width: 30%;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+
+        .nt-blok h1, .new-z h1 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .nt-blok input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .nt-blok button, .new-z button {
+            width: 100%;
+            padding: 10px;
+            background-color: orange;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        /* Новый блок new-z */
+        .new-z h2 {
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Неактивная кнопка */
+        .nt-blok button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+    </style>
+</head>
+<body>
+
+<!-- Прелоадер -->
+<div class="preloader">
+    <div class="loader"></div>
+</div>
+
+<!-- Контент страницы -->
+<div class="content blurred">
+    <!-- Блок nt-blok -->
+    <div class="nt-blok">
+        <img src="img/icon.png" alt="Изображение">
+        <h1>Укажите трек-номер</h1>
+        <input type="text" id="input-number" placeholder="Введите трек-номер" maxlength="7">
+        <button id="continue-btn" disabled>Продолжить</button>
+    </div>
+
+    <!-- Новый блок new-z -->
+    <div class="new-z">
+        <img src="img/icon.png" alt="Изображение">
+        <h1>Поздравляем <span id="user-name"></span>, вы почти готовы выполнять задания от реальных заказчиков.</h1>
+        <h2>Для этого осталось пройти последнее тестовое задание</h2>
+        <button id="start-test-btn">Начать</button>
+    </div>
+</div>
+
+<script>
+    // Удаление прелоадера через 5 секунд при загрузке страницы
+    setTimeout(() => {
+        document.querySelector('.preloader').classList.add('hidden');
+        document.querySelector('.content').classList.remove('blurred');
+        document.querySelector('.nt-blok').style.display = 'block';
+    }, 5000);
+
+    // Ограничение на ввод только цифр и активация кнопки
+    const input = document.getElementById('input-number');
+    const button = document.getElementById('continue-btn');
+
+    input.addEventListener('input', function() {
+        // Удаляем все нецифровые символы
+        this.value = this.value.replace(/\D/g, '');
+
+        // Активация кнопки при вводе 7 цифр
+        if (this.value.length === 7) {
+            button.disabled = false;
+        } else {
+            button.disabled = true;
+        }
+    });
+
+    // Событие на нажатие кнопки "Продолжить"
+    button.addEventListener('click', function() {
+        // Сохранение трек-номера в localStorage
+        localStorage.setItem('trackNumber', input.value);
+
+        // Показать прелоадер на 10 секунд
+        document.querySelector('.preloader').classList.remove('hidden');
+        document.querySelector('.content').classList.add('blurred');
+        document.querySelector('.nt-blok').style.display = 'none';
+
+        setTimeout(() => {
+            // Скрыть прелоадер и показать новый блок
+            document.querySelector('.preloader').classList.add('hidden');
+            document.querySelector('.content').classList.remove('blurred');
+            document.querySelector('.new-z').style.display = 'block';
+
+            // Извлекаем имя из локального хранилища
+            const name = localStorage.getItem('name-input');
+            const userNameSpan = document.getElementById('user-name');
+
+            // Проверяем наличие имени и подставляем в заголовок
+            if (name !== null && name.trim() !== '') {
+                userNameSpan.textContent = name;
+            } else {
+                // Если имени нет, удаляем пробелы перед запятой
+                const headerText = userNameSpan.parentElement.textContent.replace(/\s*,/, ',');
+                userNameSpan.parentElement.textContent = headerText;
+            }
+
+        }, 10000); // Прелоадер на 10 секунд
+    });
+
+    // Логика для кнопки "Начать" в блоке new-z
+    const startTestBtn = document.getElementById('start-test-btn');
+    startTestBtn.addEventListener('click', function() {
+        // Скрываем блок new-z
+        document.querySelector('.new-z').style.display = 'none';
+
+        // Показать прелоадер на 5 секунд
+        document.querySelector('.preloader').classList.remove('hidden');
+        document.querySelector('.content').classList.add('blurred');
+
+        setTimeout(() => {
+            // Перенаправление на страницу test1.html
+            window.location.href = 'test1.html';
+        }, 5000); // Прелоадер на 5 секунд
+    });
+</script>
+
+</body>
+</html>

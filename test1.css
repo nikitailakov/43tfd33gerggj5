@@ -1,0 +1,275 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "YS Text", Arial, sans-serif;
+    background-color: #e4e2e2;
+    color: #333;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 10px 20px;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #ccc;
+    transition: backdrop-filter 0.3s ease-in-out, background-color 0.3s ease-in-out;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+header.blurred {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.logo img {
+    height: 26px;
+}
+
+.login-button button {
+    background-color: #f0f6fa;
+    color: #000;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-family: "YS Text", Arial, sans-serif;
+}
+
+.login-button button:hover {
+    background-color: #d0e2f0;
+}
+
+main {
+    padding: 10px 20px;
+    margin-top: 60px;
+}
+
+.info {
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.info button {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    background-color: #ffdd2d;
+    color: #000;
+}
+
+.info li {
+    margin-left: 20px;
+}
+
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(10px);
+    z-index: 9999;
+    visibility: hidden; /* Прелоадер скрыт по умолчанию */
+}
+
+.preloader-spinner {
+    width: 100px;
+    height: 100px;
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid orange;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.wNumber{
+    background-color: #ffffff;
+    border-radius: 10px;
+    padding: 20px 20px 50px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;  
+    position: relative;
+}
+.wNumber img {
+    width: 100%;
+    height: 250px;
+    border-radius: 10px;
+}
+.wNumber h2 {
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.wNumber button {
+    margin-top: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto; 
+    padding: 10px 20px; 
+    font-size: 16px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #ffdd2d;
+    color: #000;
+    white-space: nowrap; 
+    position: absolute; /* Абсолютное позиционирование для кнопки */
+    right: 20px; /* Расположение от правого края */
+    bottom: 10px; /* Расположение от нижнего края */
+}
+
+button:disabled {
+    background-color: #ffd966; /* Тусклый оттенок желтого */
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+.radio-buttons {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.radio-buttons label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    border-radius: 5px;
+    border: 2px solid rgba(128, 128, 128, 0.7); /* Серая обводка */
+    background-color: rgba(128, 128, 128, 0.2); /* Серо-прозрачный фон */
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    color: #000; /* Черный текст */
+    margin-bottom: 15px;
+    height: 40px; /* Устанавливаем высоту кнопки */
+}
+
+.radio-buttons input[type="radio"] {
+    display: none;
+}
+
+.radio-buttons input[type="radio"]:checked + label {
+    background-color: #FFD700; /* Желтый фон для активного элемента */
+    border-color: transparent; /* Убираем обводку у активного элемента */
+}
+/* Стиль для модального окна */
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10001;
+    text-align: center;
+    width: calc(100% - 40px);
+    max-width: 500px;
+}
+
+/* Стиль для изображения в модальном окне */
+.modal img {
+    width: 75px;
+    height: 75px;
+    margin-bottom: 20px;
+}
+
+/* Стиль для кнопки "Ок" */
+.modal button {
+    background-color: #FFD700;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+/* Стиль для размытия фона позади модального окна */
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(5px);
+    z-index: 10000;
+    display: none; /* По умолчанию скрыт */
+}
+
+/* Стиль для финального экрана без обводки и размещённого под шапкой */
+.winTest {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: calc(100% - 40px);
+    max-width: 500px;
+    margin: 80px auto; /* Размещение под шапкой с отступом */
+}
+
+/* Стиль для изображения в финальном экране */
+.winTest img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 20px;
+}
+
+/* Стиль для кнопки "Ок" на финальном экране */
+.winTest button {
+    background-color: #FFD700;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}

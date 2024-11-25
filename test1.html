@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Яндекс Услуги</title>
+    <link rel="icon" href="/img/icon.png" type="image/png">
+    <link rel="stylesheet" href="test1.css">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+               <img src="/img/logo.svg" alt="Логотип">
+            </div>                      
+        </div>
+    </header>
+    <main>
+        <div id="info" class="info">
+           <img src="/img/info.svg" alt="Демо иконка">
+            <h2>Инструкция</h2>
+            <br><br>
+            <p>В задании вы увидите изображения обуви. Ваша задача — определить их тип.</p>
+            <br>
+            <p>Чтобы выполнять задания быстрее, используйте горячие клавиши 1, 2, 3 и стрелки, если вы выполняете задание на компьютере или ноутбуке.</p>
+            <br><br>
+            <h3>Как выполнить задание:</h3>
+            <br>
+            <ol>
+                <li>Внимательно посмотрите на картинку.</li>
+                <br>
+                <li>Выберите один из вариантов ответа. Если картинка не соответствует ни одному предложенному типу, выберите ответ Другое.</li>
+                <br>
+                <li>Пропускайте задания, в которых не загрузилось больше половины картинок.</li>
+            </ol>
+            <button id="startTest">Начать</button>
+        </div>
+
+        <div id="preloader">
+            <div class="preloader-spinner"></div>
+        </div>
+
+        <div class="wNumber" id="wTest">
+            <div id="timer" style="font-size: 20px; margin-bottom: 10px;">30:00</div>
+            <img id="testImage" src="/img/test1/w1.jpg" alt="1">
+            <h2>Определите к какой категории относится товар?</h2>
+            <div class="radio-buttons">
+                <input type="radio" id="option1" name="category" value="option1">
+                <label for="option1"></label>
+        
+                <input type="radio" id="option2" name="category" value="option2">
+                <label for="option2"></label>
+        
+                <input type="radio" id="option3" name="category" value="option3">
+                <label for="option3"></label>
+                
+            </div>
+            <button id="nextW" disabled>Далее</button>
+        </div>
+        
+        <div id="winTest1" class="winTest" style="display: none;">
+           <img id="winImage" src="/img/info.svg" alt="Иконка">
+            <h2>Поздравляем!</h2>
+            <br>
+            <p>Вы успешно завершили проверочное тестирование.</p>
+            <button id="winTestOk">Ок</button>
+        </div>
+        
+        <!-- Модальное окно для сообщения о завершении времени -->
+        <div id="timeUpModal" class="modal" style="display: none;">
+           <img id="modalImage" src="/img/info.svg" alt="Иконка">
+            <h2>Время истекло</h2>
+            <p>К сожалению, вы не успели завершить тест.</p>
+            <button id="restartTest">Ок</button>
+        </div>
+        <!-- Размытие фона позади модального окна -->
+        <div id="modalOverlay" class="modalOverlay"></div>
+
+    </main>    
+    <script src="test1.js"></script>
+</body>
+</html>
